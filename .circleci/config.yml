@@ -12,7 +12,7 @@ executors:
   java17:
     docker:
       - image: 'cimg/openjdk:17.0'
- docker-publisher: 
+  docker-publisher: 
     docker: 
        - image: circleci/node:latest
     auth:
