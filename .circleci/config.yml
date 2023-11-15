@@ -25,9 +25,9 @@ jobs:
              docker build -t ${DOCKERHUB_USERNAME}/$IMAGE_NAME:latest .
              docker push ${DOCKERHUB_USERNAME}/$IMAGE_NAME:latest
   say-hello:
-     docker:
+    docker:
       - image: cimg/base:stable
-     steps:
+    steps:
       - checkout
       - run:
           name: "Say hello"
