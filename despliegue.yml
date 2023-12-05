@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: credicoopweb-node
-          image: jhndbr/deploys:latest
+          image: alextolaba/ddsdeploys:latest
           env:
             - name: hibernate_hbm2ddl_auto
               value: "create"  # Envolver valores numéricos con comillas
