@@ -43,11 +43,10 @@ pipeline {
                             sh 'kubectl apply -f serviciosbd.yml'
                             sh 'kubectl apply -f despliegue.yml'
                             sh 'kubectl apply -f servicios.yml'
-                                }
                             }
                         }
-                     )
-                }
+                    }
+                )
             }
         }
     }
