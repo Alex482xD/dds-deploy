@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: credicoopdeploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      nombre: CredicoopWeb
+      tier: backend
+  template:
+    metadata:
+      labels:
+        nombre: CredicoopWeb
+        tier: backend
+    spec:
+      containers:
+        - name: credicoopweb-node
+          image: jhndbr/deploys:latest
+          env:
+            - name: hibernate_hbm2ddl_auto
+              value: "create"  # Envolver valores numéricos con comillas
+            - name: javax_persistence_jdbc_driver
+              value: "org.postgresql.Driver"
+            - name: javax_persistence_jdbc_url
+              value: "jdbc:postgresql://dbservice/dblibros"
+            - name: javax_persistence_jdbc_user
+              value: "postgres"
+            - name: javax_persistence_jdbc_password
+              value: "libros"
