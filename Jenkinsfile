@@ -3,7 +3,7 @@ pipeline {
     environment {
         //be sure to replace "felipelujan" with your own Docker Hub username
         DOCKER_IMAGE_NAME = "alextolaba/ddsdeploy"
-        KUBECONFIG = credentials('kubeconfig')
+        KUBECONFIG = credentials('mykubeconfig')
     }
     stages {      
         stage('Build Docker Image') {
