@@ -3,6 +3,7 @@ pipeline {
     environment {
         //be sure to replace "felipelujan" with your own Docker Hub username
         DOCKER_IMAGE_NAME = "alextolaba/ddsdeploy"
+        KUBECONFIG = credentials('kubeconfig')
     }
     stages {      
         stage('Build Docker Image') {
@@ -33,11 +34,14 @@ pipeline {
                 branch 'main'
             }
             steps {
-                milestone(1)
-                kubernetesDeploy(
-                    kubeconfigId: 'kubeconfig',
-                    configs: 'k8s_svc_deploy.yaml',
-                    enableConfigSubstitution: true
+                    script {
+                        withEnv (["KUBECONFIG = ${KUBECONFIG}"]){
+                            sh 'kubectl apply -f basededatos.yml' 
+                            sh 'kubectl apply -f serviciosbd.yml'
+                            sh 'kubectl apply -f despliegue.yml'
+                            sh 'kubectl apply -f servicios.yml'
+                        }
+                    }
                 )
             }
         }
