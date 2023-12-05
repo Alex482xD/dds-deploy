@@ -33,17 +33,22 @@ pipeline {
             when {
                 branch 'main'
             }
-            steps {
+        stages {
+            stage ('Deploy to kubernetes') {
+                steps {
                     script {
                         withEnv (["KUBECONFIG = ${KUBECONFIG}"]){
+                            //aplica la config al kube
                             sh 'kubectl apply -f basededatos.yml' 
                             sh 'kubectl apply -f serviciosbd.yml'
                             sh 'kubectl apply -f despliegue.yml'
                             sh 'kubectl apply -f servicios.yml'
+                                }
+                            }
                         }
-                    }
-                )
+                     )
+                }
             }
         }
     }
-}
+} 
